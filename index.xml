@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
-    <link>http://example.org/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <title>Paper</title>
+    <link>https://dive-ors.github.io/</link>
+    <description>Recent content on Paper</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>ko-KR</language>
     <lastBuildDate>Thu, 07 Apr 2022 21:28:42 +0900</lastBuildDate>
     
-	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dive-ors.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>My First Post</title>
-      <link>http://example.org/posts/my-first-post/</link>
+      <link>https://dive-ors.github.io/posts/my-first-post/</link>
       <pubDate>Thu, 07 Apr 2022 21:28:42 +0900</pubDate>
       
-      <guid>http://example.org/posts/my-first-post/</guid>
+      <guid>https://dive-ors.github.io/posts/my-first-post/</guid>
       <description></description>
     </item>
     
