@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   
-  <title>Categories - Paper</title>
+  <title>Categories - dive-ors</title>
 
   
   
@@ -53,7 +53,7 @@
     rel="alternate"
     type="application/rss&#43;xml"
     href="https://dive-ors.github.io/categories/index.xml"
-    title="Paper"
+    title="dive-ors"
   />
   
 
@@ -89,7 +89,7 @@
     <header class="header">
   
   <p class="logo">
-    <a class="site-name" href="https://dive-ors.github.io/">Paper</a><a class="btn-dark"></a>
+    <a class="site-name" href="https://dive-ors.github.io/">dive-ors</a>
   </p>
   
 
@@ -100,15 +100,13 @@
     let darkVal = localStorage.getItem('dark');
 
     let setDark = (isDark) => {
-      bodyClx[isDark ? 'add' : 'remove']('dark');
-      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+      bodyClx['add']('dark');
+      localStorage.setItem('dark', 'yes');
     };
 
-    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    setDark(true);
     requestAnimationFrame(() => bodyClx.remove('not-ready'));
 
-    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
-    sysDark.addEventListener('change', (event) => setDark(event.matches));
   </script>
 
   
@@ -119,10 +117,6 @@
 
 
     <main class="main">
-
-
-
-<h1 class="main-title">Categories</h1>
 
 
 
@@ -138,7 +132,7 @@
 </main>
 
     <footer class="footer">
-  <p>&copy; 2022 <a href="https://dive-ors.github.io/">Paper</a></p>
+  <p>&copy; 2022 <a href="https://dive-ors.github.io/">dive-ors</a></p>
   <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
   <p>
     <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>

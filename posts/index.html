@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   
-  <title>Posts - Paper</title>
+  <title>Posts - dive-ors</title>
 
   
   
@@ -53,7 +53,7 @@
     rel="alternate"
     type="application/rss&#43;xml"
     href="https://dive-ors.github.io/posts/index.xml"
-    title="Paper"
+    title="dive-ors"
   />
   
 
@@ -70,7 +70,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://dive-ors.github.io/posts/" />
-<meta property="og:updated_time" content="2022-04-07T21:28:42+09:00" />
+<meta property="og:updated_time" content="2022-04-07T22:10:26+09:00" />
 
   
   <meta itemprop="name" content="Posts">
@@ -89,7 +89,7 @@
     <header class="header">
   
   <p class="logo">
-    <a class="site-name" href="https://dive-ors.github.io/">Paper</a><a class="btn-dark"></a>
+    <a class="site-name" href="https://dive-ors.github.io/">dive-ors</a>
   </p>
   
 
@@ -100,15 +100,13 @@
     let darkVal = localStorage.getItem('dark');
 
     let setDark = (isDark) => {
-      bodyClx[isDark ? 'add' : 'remove']('dark');
-      localStorage.setItem('dark', isDark ? 'yes' : 'no');
+      bodyClx['add']('dark');
+      localStorage.setItem('dark', 'yes');
     };
 
-    setDark(darkVal ? darkVal === 'yes' : sysDark.matches);
+    setDark(true);
     requestAnimationFrame(() => bodyClx.remove('not-ready'));
 
-    btnDark.addEventListener('click', () => setDark(!bodyClx.contains('dark')));
-    sysDark.addEventListener('change', (event) => setDark(event.matches));
   </script>
 
   
@@ -122,19 +120,21 @@
 
 
 
-<h1 class="main-title">Posts</h1>
-
-
-
 
 
 
 
  
 <article class="post-entry">
-  <h2>My First Post</h2>
+  <h2>Elastic Search 01 장</h2>
   <time>:date_medium</time>
-  <a href="https://dive-ors.github.io/posts/my-first-post/"></a>
+  <a href="https://dive-ors.github.io/posts/elastic-search-01/"></a>
+</article>
+
+<article class="post-entry">
+  <h2>Elastic Search Setup</h2>
+  <time>:date_medium</time>
+  <a href="https://dive-ors.github.io/posts/elastic-search-setup/"></a>
 </article>
 
 
@@ -144,7 +144,7 @@
 </main>
 
     <footer class="footer">
-  <p>&copy; 2022 <a href="https://dive-ors.github.io/">Paper</a></p>
+  <p>&copy; 2022 <a href="https://dive-ors.github.io/">dive-ors</a></p>
   <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
   <p>
     <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>

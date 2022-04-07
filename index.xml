@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Paper</title>
+    <title>dive-ors</title>
     <link>https://dive-ors.github.io/</link>
-    <description>Recent content on Paper</description>
+    <description>Recent content on dive-ors</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 07 Apr 2022 21:28:42 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 07 Apr 2022 22:10:26 +0900</lastBuildDate>
     
 	<atom:link href="https://dive-ors.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>My First Post</title>
-      <link>https://dive-ors.github.io/posts/my-first-post/</link>
-      <pubDate>Thu, 07 Apr 2022 21:28:42 +0900</pubDate>
+      <title>Elastic Search 01 장</title>
+      <link>https://dive-ors.github.io/posts/elastic-search-01/</link>
+      <pubDate>Thu, 07 Apr 2022 22:10:26 +0900</pubDate>
       
-      <guid>https://dive-ors.github.io/posts/my-first-post/</guid>
-      <description></description>
+      <guid>https://dive-ors.github.io/posts/elastic-search-01/</guid>
+      <description>ES 1장 훑어보기 Elasticsearch는 Lucence 기반의 오픈소스 검색엔진으로, Json 기반의 문서를 저장 / 검색 / 데이터 분석 작업을 할 수 있다.
+ES는 아래 4가지 큰 특징을 갖고 있다.
+ 준실시간 검색 엔진 클러스터 구성 스키마리스 Rest API  준실시간 검색 엔진 이란, 실시간에 준하는 검색을 제공한다는 의미이다. ES는 데이터가 입력 될 경우 메모리에 저장 후, Shard (데이터 저장공간)에 데이터를 저장한다.
+ refresh_interval 에 입력된 주기로, 메모리에 저장된 데이터를 Disk에 옮긴다.</description>
+    </item>
+    
+    <item>
+      <title>Elastic Search Setup</title>
+      <link>https://dive-ors.github.io/posts/elastic-search-setup/</link>
+      <pubDate>Thu, 07 Apr 2022 21:55:20 +0900</pubDate>
+      
+      <guid>https://dive-ors.github.io/posts/elastic-search-setup/</guid>
+      <description>Docker 를 이용한 Elasticsearch 설치 자세한 가이드는 ES 문서 를 참고해주세요.
+Elasticsearch 8 점대부터는 TLS 이 기본으로 들어갑니다.
+ local 에서 Test 하더라도, https 설정이 필요합니다.  # docker image pull# 작성 시점에는 8.1.1 버전을 사용합니다. docker pull docker.elastic.co/elasticsearch/elasticsearch:${version}# 다른 container 와 통신 하기 위해, network 설정 docker network create elastic# elasticsearch run docker run --name es01 --net elastic -p 9200:9200 -p 9300:9300 -it docker.elastic.co/elasticsearch/elasticsearch:8.1.1만약 docker 를 띄우는 과정에서, max virtual memory areas vm.</description>
     </item>
     
   </channel>
