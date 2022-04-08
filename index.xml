@@ -6,10 +6,20 @@
     <description>Recent content on dive-ors</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 07 Apr 2022 22:10:26 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 07 Apr 2022 23:10:26 +0900</lastBuildDate>
     
 	<atom:link href="https://dive-ors.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Elastic Search 02 장</title>
+      <link>https://dive-ors.github.io/posts/elastic-search-02/</link>
+      <pubDate>Thu, 07 Apr 2022 23:10:26 +0900</pubDate>
+      
+      <guid>https://dive-ors.github.io/posts/elastic-search-02/</guid>
+      <description>2장 ES 기본 동작 문서 색인과 조회 아래 요청은 인덱스를 생성하고, 문서를 색인하고, 스키마를 만드는 등, 많은 작업을 처리한다.
+# request PUT /user/_doc/1 {&amp;#34;username&amp;#34; : &amp;#34;alden.kang&amp;#34;}# response{&amp;#34;_index&amp;#34; : &amp;#34;user&amp;#34;,&amp;#34;_id&amp;#34; : &amp;#34;1&amp;#34;,&amp;#34;_version&amp;#34; : 1,&amp;#34;result&amp;#34; : &amp;#34;created&amp;#34;,&amp;#34;_shards&amp;#34; : {&amp;#34;total&amp;#34; : 2,&amp;#34;successful&amp;#34; : 1,&amp;#34;failed&amp;#34; : 0},&amp;#34;_seq_no&amp;#34; : 0,&amp;#34;_primary_term&amp;#34; : 1} PUT 은 새로운 문서를 입력한다.  POST 는 수정 DELETE 는 삭제 GET은 조회를 의미한다.</description>
+    </item>
     
     <item>
       <title>Elastic Search 01 장</title>

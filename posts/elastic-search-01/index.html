@@ -25,7 +25,7 @@
 ES는 아래 4가지 큰 특징을 갖고 있다.
  준실시간 검색 엔진 클러스터 구성 스키마리스 Rest API  준실시간 검색 엔진 이란, 실시간에 준하는 검색을 제공한다는 의미이다. ES는 데이터가 입력 될 경우 메모리에 저장 후, Shard (데이터 저장공간)에 데이터를 저장한다.
  refresh_interval 에 입력된 주기로, 메모리에 저장된 데이터를 Disk에 옮긴다." />
-  <meta name="author" content="" />
+  <meta name="author" content="dive-ors" />
   
 
   
@@ -87,11 +87,11 @@ ES는 아래 4가지 큰 특징을 갖고 있다.
  refresh_interval 에 입력된 주기로, 메모리에 저장된 데이터를 Disk에 옮긴다.">
 <meta itemprop="datePublished" content="2022-04-07T22:10:26&#43;09:00" />
 <meta itemprop="dateModified" content="2022-04-07T22:10:26&#43;09:00" />
-<meta itemprop="wordCount" content="1659">
+<meta itemprop="wordCount" content="184">
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="elasticsearch,book," />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Elastic Search 01 장"/>
@@ -145,6 +145,8 @@ ES는 아래 4가지 큰 특징을 갖고 있다.
       <time>:date_medium</time>
       
       
+      <span>dive-ors</span>
+      
     </p>
     <h1>Elastic Search 01 장</h1>
   </header>
@@ -162,7 +164,7 @@ ES는 데이터가 입력 될 경우 메모리에 저장 후, Shard (데이터 �
 <blockquote>
 <p><code>refresh_interval</code> 에 입력된 주기로, 메모리에 저장된 데이터를 Disk에 옮긴다.</p>
 </blockquote>
-<p><img src="./%EC%A4%80-%EC%8B%A4%EC%8B%9C%EA%B0%84%EC%84%B1.jpg" alt="준 실시간 성"></p>
+<p><img src="/images/es/%EC%A4%80-%EC%8B%A4%EC%8B%9C%EA%B0%84%EC%84%B1.jpg" alt="준 실시간 성"></p>
 <p><code>클러스터</code> 란, 여러대의 구성 요소를 논리적으로 결합하여, 하나의 구성 요소 처럼 사용 할 수 있게 해주는 기술이며, ES는 1개 이상의 노드를 묶어서 하나의 클러스터로 구성할 수 있다.
 클러스터로 구성하면, 높은 수준의 안정성과 부하 분산을 기대할 수 있다.
 또한 같은 클러스터에 속한 노드들은 메시 형태로 요청을 주고 받기때문에, 어떤 노드에서도 색인 / 검색 작업을 처리할 수 있다.</p>
@@ -174,455 +176,25 @@ ES는 데이터가 입력 될 경우 메모리에 저장 후, Shard (데이터 �
 <p>사전에 스키마를 정의하지 않아도, 데이터를 입력시 동적으로 스키마를 생성되며, 기존에 있는 컬럼에 다른 타입을 입력 할 경우 충돌이 발생한다.</p>
 </blockquote>
 <p><code>Rest API</code>를 지원함으로, 어떤 언어로도 Client 를 만들 수 있다.</p>
-<h1 id="2장-es-기본-동작">2장 ES 기본 동작</h1>
-<h2 id="문서-색인과-조회">문서 색인과 조회</h2>
-<p>아래 요청은 인덱스를 생성하고, 문서를 색인하고, 스키마를 만드는 등, 많은 작업을 처리한다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># request 
-PUT /user/_doc/1  
-{
-  &#34;username&#34; : &#34;alden.kang&#34;
-}
-
-# response
-{
-  &#34;_index&#34; : &#34;user&#34;,
-  &#34;_id&#34; : &#34;1&#34;,
-  &#34;_version&#34; : 1,
-  &#34;result&#34; : &#34;created&#34;,
-  &#34;_shards&#34; : {
-    &#34;total&#34; : 2,
-    &#34;successful&#34; : 1,
-    &#34;failed&#34; : 0
-  },
-  &#34;_seq_no&#34; : 0,
-  &#34;_primary_term&#34; : 1
-}
-</code></pre></div><ul>
-<li>PUT 은 새로운 문서를 입력한다.
-<ul>
-<li>POST 는 수정</li>
-<li>DELETE 는 삭제</li>
-<li>GET은 조회를 의미한다.</li>
-</ul>
-</li>
-<li>user 는 index 의 이름으로, 인덱스란 문서를 저장하는 가장 큰 논리적인 단위를 의미한다.</li>
-<li>_doc 은 문서의 타입을 의미하며, 6 버전 이후부턴 인덱스에 하나의 타입만 저장 할 수 있게 설계가 변경되었다.</li>
-<li>1 은 문서의 ID 이며, 같은 ID 가 입력되면 문서를 수정한다고 인식한다.</li>
-</ul>
-<p>즉, 위 요청은 user 라는 Index 에 _doc 타입으로 1번 문서를 색인해달라는 요청이다.</p>
-<p><img src="./%EC%83%89%EC%9D%B8-%EA%B3%BC%EC%A0%95.jpg" alt="색인 과정"></p>
-<ol>
-<li>색인 요청 시, Index 가 없다면 Index 를 생성한다.</li>
-<li>Index 생성 후 (or Index 가 있다면) 타입을 확인 후 생성한다.</li>
-<li>타입 이 후, scheme 가 없다면 생성하고, scheme 간 충돌이 있다면 exception 을 발생 시킨다.</li>
-<li>scheme 에 문제가 없다면, 기존 문서 ID 값을 이용하여 생성 / 업데이트를 한다.</li>
-</ol>
-<p>위 과정을 통해 Elasticsearch 는 Index / Type / Scheme 를 정의하지 않아도 문서를 색인 할 수 있다.</p>
-<p>저장된 문서를 확인하기 위해서 GET 을 사용한다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#request
-GET /user/_doc/1
-
-#response
-{
-  &#34;_index&#34; : &#34;user&#34;, # 
-  &#34;_id&#34; : &#34;1&#34;,
-  &#34;_version&#34; : 1,
-  &#34;_seq_no&#34; : 0,
-  &#34;_primary_term&#34; : 1,
-  &#34;found&#34; : true,
-  &#34;_source&#34; : {
-    &#34;username&#34; : &#34;alden.kang&#34;
-  }
-}
-</code></pre></div><p>조회 시에는 문서의 메티데이터가 함께 나오는데, 각 설명은 아래와 같다.</p>
-<ul>
-<li>&ldquo;_index&rdquo; 어떤 인덱스에 있는지를 의미한다.</li>
-<li>&ldquo;_type&rdquo; 어떤 타입인지를 의미한다.</li>
-<li>&ldquo;_id&rdquo; 문서의 id를 의미한다.</li>
-<li>&ldquo;_source&rdquo; 문서의 내용을 의미한다.</li>
-</ul>
-<p>또한 문서를 삭제하기 위해선 DELETE 를 사용한다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#request
-DELETE /user/_doc/1
-
-#response
-{
-  &#34;_index&#34; : &#34;user&#34;,
-  &#34;_id&#34; : &#34;1&#34;,
-  &#34;_version&#34; : 2,
-  &#34;result&#34; : &#34;deleted&#34;,
-  &#34;_shards&#34; : {
-    &#34;total&#34; : 2,
-    &#34;successful&#34; : 1,
-    &#34;failed&#34; : 0
-  },
-  &#34;_seq_no&#34; : 1,
-  &#34;_primary_term&#34; : 1
-}
-</code></pre></div><p>result 를 보면 정상적으로 삭제되었음을 알 수 있다. 문서를 삭제 후, 조회하면 아래와 같은 결과가 나온다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;_index&#34;</span> : <span style="color:#e6db74">&#34;user&#34;</span>,
-  <span style="color:#f92672">&#34;_id&#34;</span> : <span style="color:#e6db74">&#34;1&#34;</span>,
-  <span style="color:#f92672">&#34;found&#34;</span> : <span style="color:#66d9ef">false</span>
-}
-</code></pre></div><p>이번엔 위 과정들을 조금 더 풀어서, 생성 / 색인 / 수정 등의 과정을 한 단계 씩 진행해 보자.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># 문서 생성 
-PUT /contents/_doc/1?pretty
-{
-  &#34;title&#34; : &#34;How to use ElasticSearch&#34;,
-  &#34;author&#34; : &#34;alden.kang&#34;
-}
-# response
-{
-  &#34;_index&#34; : &#34;contents&#34;,
-  &#34;_id&#34; : &#34;1&#34;,
-  &#34;_version&#34; : 1, 
-  &#34;result&#34; : &#34;created&#34;,
-  &#34;_shards&#34; : {
-    &#34;total&#34; : 2,
-    &#34;successful&#34; : 1,
-    &#34;failed&#34; : 0
-  },
-  &#34;_seq_no&#34; : 2,
-  &#34;_primary_term&#34; : 1
-}
-
-# index 상태 확인 
-GET _cat/indices?v
-
-# response
-health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-yellow open   contents n1yijQ6bQ8SpQSIuyLoDXg   1   1          1            0      4.6kb          4.6kb
-yellow open   user     GuQ0DmjHQXa0AXWWCZpGSw   1   1          0            0      3.3kb          3.3kb
-</code></pre></div><p>위 상태에서 문서의 내용을 바꾼 후, PUT을 입력하면 아래와 같은 응답을 받게된다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;_index&#34;</span> : <span style="color:#e6db74">&#34;contents&#34;</span>,
-  <span style="color:#f92672">&#34;_id&#34;</span> : <span style="color:#e6db74">&#34;1&#34;</span>,
-  <span style="color:#f92672">&#34;_version&#34;</span> : <span style="color:#ae81ff">2</span>,  <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">version</span> <span style="color:#960050;background-color:#1e0010">이</span> <span style="color:#960050;background-color:#1e0010">1</span> <span style="color:#960050;background-color:#1e0010">증가했다.</span>
-  <span style="color:#f92672">&#34;result&#34;</span> : <span style="color:#e6db74">&#34;updated&#34;</span>, <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">result</span> <span style="color:#960050;background-color:#1e0010">가</span> <span style="color:#960050;background-color:#1e0010">updated</span> <span style="color:#960050;background-color:#1e0010">로</span> <span style="color:#960050;background-color:#1e0010">바뀐다.</span>
-  <span style="color:#f92672">&#34;_shards&#34;</span> : {
-    <span style="color:#f92672">&#34;total&#34;</span> : <span style="color:#ae81ff">2</span>,
-    <span style="color:#f92672">&#34;successful&#34;</span> : <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">&#34;failed&#34;</span> : <span style="color:#ae81ff">0</span>
-  },
-  <span style="color:#f92672">&#34;_seq_no&#34;</span> : <span style="color:#ae81ff">3</span>,
-  <span style="color:#f92672">&#34;_primary_term&#34;</span> : <span style="color:#ae81ff">1</span>
-}
-</code></pre></div><p>위 처럼 동일한 ID 를 이용하여 문서를 입력하면, 수정이 발생한다.
-또한 이렇게 입력된 scheme 정보는 아래 명령어로 확인 할 수 있다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># scheme mapping 정보 확인 
-GET /contents/_mapping
-
-#response 
-{
-  &#34;contents&#34; : {
-    &#34;mappings&#34; : {
-      &#34;properties&#34; : {
-        &#34;author&#34; : {
-          &#34;type&#34; : &#34;text&#34;,
-          &#34;fields&#34; : {
-            &#34;keyword&#34; : {
-              &#34;type&#34; : &#34;keyword&#34;,
-              &#34;ignore_above&#34; : 256
-            }
-          }
-        },
-        &#34;title&#34; : {
-          &#34;type&#34; : &#34;text&#34;,
-          &#34;fields&#34; : {
-            &#34;keyword&#34; : {
-              &#34;type&#34; : &#34;keyword&#34;,
-              &#34;ignore_above&#34; : 256
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</code></pre></div><p>위 응답으로, author, title 필드가 정의되었고 둘 다 문자열 형태의 타입으로 정의된 것을 알 수 있다.
-이 상태에서 새로운 필드를 가진 문서를 색인하면, 아래처럼 scheme 이 바뀐다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">PUT /contents/_doc/1?pretty
-{
-  &#34;title&#34; : &#34;How to use ElasticSearch&#34;,
-  &#34;author&#34; : &#34;alden.kang&#34;,
-  &#34;rating&#34; : 5.0
-}
-
-# response
-{
-  &#34;contents&#34; : {
-    &#34;mappings&#34; : {
-      &#34;properties&#34; : {
-        &#34;author&#34; : {
-          &#34;type&#34; : &#34;text&#34;,
-          &#34;fields&#34; : {
-            &#34;keyword&#34; : {
-              &#34;type&#34; : &#34;keyword&#34;,
-              &#34;ignore_above&#34; : 256
-            }
-          }
-        },
-        &#34;rating&#34; : { # rating 이 추가되었다.
-          &#34;type&#34; : &#34;float&#34;
-        },
-        &#34;title&#34; : {
-          &#34;type&#34; : &#34;text&#34;,
-          &#34;fields&#34; : {
-            &#34;keyword&#34; : {
-              &#34;type&#34; : &#34;keyword&#34;,
-              &#34;ignore_above&#34; : 256
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</code></pre></div><p>정상적으로 문서가 색인 된 걸 볼 수 있는데, 기존에 scheme 가 정의되어 있다고 하더라도, 새로운 필드가 추가되면 동적으로 필드가 색인되고, 스키마가 정의된다는 것을 알 수 있다.</p>
-<blockquote>
-<p>rating 이 실수 형으로 입력되어, float type 으로 정의되었다.</p>
-</blockquote>
-<p>만약 이미 저장된 scheme 과 다른 Type 으로 데이터가 입력되면 어떻게 될까 ?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
-PUT /contents/_doc/3?pretty
-{
-  &#34;title&#34; : &#34;How to use ElasticSearch&#34;,
-  &#34;author&#34; : &#34;alden.kang&#34;,
-  &#34;rating&#34; : &#34;Hello&#34;
-}
-
-# response
-
-{
-  &#34;error&#34; : {
-    &#34;root_cause&#34; : [
-      {
-        &#34;type&#34; : &#34;mapper_parsing_exception&#34;,
-        &#34;reason&#34; : &#34;failed to parse field [rating] of type [float] in document with id &#39;3&#39;. Preview of field&#39;s value: &#39;Hello&#39;&#34;
-      }
-    ],
-    &#34;type&#34; : &#34;mapper_parsing_exception&#34;,
-    &#34;reason&#34; : &#34;failed to parse field [rating] of type [float] in document with id &#39;3&#39;. Preview of field&#39;s value: &#39;Hello&#39;&#34;,
-    &#34;caused_by&#34; : {
-      &#34;type&#34; : &#34;number_format_exception&#34;,
-      &#34;reason&#34; : &#34;For input string: \&#34;Hello\&#34;&#34;
-    }
-  },
-  &#34;status&#34; : 400
-}
-</code></pre></div><p>위 처럼 타입이 맞지 않아, <code>mapper_parsing_exception</code> 이 발생한다.
-scheme 충돌 에러는 로그 수집 시, 최초에 들어온 로그의 필드가 중간에 형태가 바뀌는 경우에 주로 발생한다.
-그리고 이 에러가 발생하면, 해당 로그가 색인 되지 않기 때문에, 로그 유실이 발생 할 수 있다.</p>
-<blockquote>
-<p>ES 가 schemeless 라는 것은, 정의가 아예 없다는 뜻이 아니며, 동적 scheme 를 지원한다는 의미이다.
-즉, 중간에 필드 형태가 바뀌는 것 까지 알아서 잡아주진 않는다.</p>
-</blockquote>
-<h2 id="문서-검색하기">문서 검색하기</h2>
-<p>자세한 옵션과 쿼리들은 9장에서 설명하며, 이번 장은 기능만 간단히 살펴본다.</p>
-<p>첫번째로 모든 데이터를 검색하는 풀 스캔 쿼리를 날려보자.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">GET /kibana_sample_data_ecommerce/_search?q=*
-
-#response
-{
-  &#34;took&#34; : 2,
-  &#34;timed_out&#34; : false,
-  &#34;_shards&#34; : {
-    &#34;total&#34; : 1,
-    &#34;successful&#34; : 1,
-    &#34;skipped&#34; : 0,
-    &#34;failed&#34; : 0
-  },
-  &#34;hits&#34; : {
-    &#34;total&#34; : {
-      &#34;value&#34; : 4675,
-      &#34;relation&#34; : &#34;eq&#34;
-    },
-    &#34;max_score&#34; : 1.0,
-    &#34;hits&#34; : [
-      {
-        &#34;_index&#34; : &#34;kibana_sample_data_ecommerce&#34;,
-        &#34;_id&#34; : &#34;qxA0y38BuI-mHmqmzk_V&#34;,
-        &#34;_score&#34; : 1.0,
-        &#34;_source&#34; : {
-          &#34;category&#34; : [
-            &#34;Men&#39;s Clothing&#34;
-          ],
-    //생략
-</code></pre></div><blockquote>
-<p>kibana_sample_data_ecommerce 는 kibana 에서 추가한 sample data 를 의미한다.</p>
-</blockquote>
-<p>q 는 query 의 약자이며, *은 모든 단어를 의미한다.
-위 응답중 중요한 데이터는 아래와 같다.</p>
-<ul>
-<li>took 은 검색에 소요된 시간을 의미한다.</li>
-<li>_shards -&gt; total 은 검색에 참여한 샤드의 개수를 의미한다.</li>
-<li>hits -&gt; total 은 검색 결과의 개수를 의미한다.</li>
-</ul>
-<p>검색 쿼리는 아래처럼 문자열을 검색하거나, 각 필드의 값을 검색 할 수 있다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># 1
-GET /kibana_sample_data_ecommerce/_search?q=Eddie # Eddie 라는 문자열이 포함된 문서를 찾기 위한 검색
-
-# 2
-GET /kibana_sample_data_ecommerce/_search # order_id 가 584677 인 문서를 찾기 위한 query 이다.
-{
-  &#34;query&#34; : {
-    &#34;match&#34; : {
-      &#34;order_id&#34; : 584677
-    }
-  }
-}
-</code></pre></div><p><code>#1</code> 은 Eddie 라는 문자열이 포함된 문서를 찾기 위한 Query 이며, <code>#2</code> 는 order_id 가 584677 인 문서를 찾기 위한 query 이다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#3
-GET /kibana_sample_data_ecommerce/_search
-{
-  &#34;query&#34;: {
-    &#34;bool&#34; : {
-      &#34;must&#34;: {&#34;match_all&#34;: {}},
-      &#34;filter&#34;: {
-          &#34;range&#34;: {
-            &#34;products.price&#34;: {
-              &#34;gte&#34;: 100
-            }
-          }
-        }
-    }
-  }
-}
-</code></pre></div><p><code>#3</code> 은 범위를 기준으로 한 검색으로, price 가 100 이상인 문서를 검색한다.</p>
-<blockquote>
-<p>filter 와 query 의 자세한 차이점은 9장에서 살펴본다.</p>
-</blockquote>
-<h2 id="문서-분석하기">문서 분석하기</h2>
-<p>이 전까진 특정 조건을 만족하는 문서를 검색했다면, 검색을 바탕으로 통계 데이터를 만들 수 있다.
-이러한 분석 작업을 aggregation 이라고 부르며, 역시 search API 를 기반으로 진행된다.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#4
-GET /kibana_sample_data_ecommerce/_search
-{
-  &#34;size&#34;: 0,
-  &#34;aggs&#34; : {
-    &#34;group_by_state&#34;: {
-       &#34;terms&#34;: {
-         &#34;field&#34;: &#34;customer_gender&#34;
-       } 
-    }
-  }
-}
-
-# response
-{
-  &#34;took&#34; : 23,
-  &#34;timed_out&#34; : false,
-  &#34;_shards&#34; : {
-    &#34;total&#34; : 1,
-    &#34;successful&#34; : 1,
-    &#34;skipped&#34; : 0,
-    &#34;failed&#34; : 0
-  },
-  &#34;hits&#34; : {
-    &#34;total&#34; : {
-      &#34;value&#34; : 4675,
-      &#34;relation&#34; : &#34;eq&#34;
-    },
-    &#34;max_score&#34; : null,
-    &#34;hits&#34; : [ ]
-  },
-  &#34;aggregations&#34; : {
-    &#34;group_by_state&#34; : {
-      &#34;doc_count_error_upper_bound&#34; : 0,
-      &#34;sum_other_doc_count&#34; : 0,
-      &#34;buckets&#34; : [
-        {
-          &#34;key&#34; : &#34;FEMALE&#34;,
-          &#34;doc_count&#34; : 2433
-        },
-        {
-          &#34;key&#34; : &#34;MALE&#34;,
-          &#34;doc_count&#34; : 2242
-        }
-      ]
-    }
-  }
-}
-</code></pre></div><p><code>#4</code> 은 aggregation query 로, 상품을 구매한 성별을 기준으로 통계 데이터를 추출한다.</p>
-<blockquote>
-<p>FEMALE 가 2,433 건, MALE 이 2,242 건임을 알 수 있다.</p>
-</blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#5
-GET /kibana_sample_data_ecommerce/_search
-{
-  &#34;size&#34;: 0,
-  &#34;aggs&#34; : {
-    &#34;group_by_state&#34;: {
-       &#34;terms&#34;: {
-         &#34;field&#34;: &#34;customer_gender&#34;
-       },
-       &#34;aggs&#34; : {
-         &#34;average_product&#34; : {
-           &#34;avg&#34;: {
-             &#34;field&#34;: &#34;total_quantity&#34;
-           }
-         }
-       }
-    }
-  }
-}
-
-# response 
-{
-  &#34;took&#34; : 2,
-  &#34;timed_out&#34; : false,
-  &#34;_shards&#34; : {
-    &#34;total&#34; : 1,
-    &#34;successful&#34; : 1,
-    &#34;skipped&#34; : 0,
-    &#34;failed&#34; : 0
-  },
-  &#34;hits&#34; : {
-    &#34;total&#34; : {
-      &#34;value&#34; : 4675,
-      &#34;relation&#34; : &#34;eq&#34;
-    },
-    &#34;max_score&#34; : null,
-    &#34;hits&#34; : [ ]
-  },
-  &#34;aggregations&#34; : {
-    &#34;group_by_state&#34; : {
-      &#34;doc_count_error_upper_bound&#34; : 0,
-      &#34;sum_other_doc_count&#34; : 0,
-      &#34;buckets&#34; : [
-        {
-          &#34;key&#34; : &#34;FEMALE&#34;,
-          &#34;doc_count&#34; : 2433,
-          &#34;average_product&#34; : {
-            &#34;value&#34; : 2.1265926839293052
-          }
-        },
-        {
-          &#34;key&#34; : &#34;MALE&#34;,
-          &#34;doc_count&#34; : 2242,
-          &#34;average_product&#34; : {
-            &#34;value&#34; : 2.1931311329170384
-          }
-        }
-      ]
-    }
-  }
-}
-</code></pre></div><p><code>#5</code> 쿼리를 통해, 성별로 구매한 평균 product 개수를 알 수 있다.
-이러한 분석 작업은 경우에 따라, 많은 양의 힙 메모리를 필요로 할 수 있기 때문에, kibana 같은 시각화 툴을 사용할 경우 조심해야한다.</p>
-<blockquote>
-<p>데이터 범위를 지나치게 크게 잡을 경우, ES 전체가 응답 불가에 빠질 수 있다.</p>
-</blockquote>
 </section>
 
   
+  
+  <footer class="post-tags">
+     
+    <a href="https://dive-ors.github.io/tags/elasticsearch">elasticsearch</a>
+     
+    <a href="https://dive-ors.github.io/tags/book">book</a>
+    
+  </footer>
   
 
   
   
   
   <nav class="post-nav">
+    
+    <a class="prev" href="https://dive-ors.github.io/posts/elastic-search-02/"><span>←</span><span>Elastic Search 02 장</span></a>
      
     <a class="next" href="https://dive-ors.github.io/posts/elastic-search-setup/"><span>Elastic Search Setup</span><span>→</span></a>
     
