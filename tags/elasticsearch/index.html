@@ -1,155 +1,20 @@
 <!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.68.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>elasticsearch&nbsp;&ndash;&nbsp;notepad</title><link rel="stylesheet" href="/css/core.min.728be81171c261365b7f0debf543c26b5912c741cd62ad3c4935c0d875a3958190df524c96da33abe00cdf06c4d9d727.css" integrity="sha384-covoEXHCYTZbfw3r9UPCa1kSx0HNYq08STXA2HWjlYGQ31JMltozq&#43;AM3wbE2dcn"><link rel="alternate" type="application/rss+xml" href="/tags/elasticsearch/index.xml" title="notepad" /><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="elasticsearch" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">notepad</span></a></span>
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/categories/">Categories</a><a class="nav item" href="/tags/">Tags</a><a class="nav item" href="/about">About</a><a class="nav item" href="https://dive-ors%2egithub%2eio/"target="_blank" rel="noopener noreferrer">notepad</a></nav></div></span></div></section><section id="content"><section class="article header"><h1>elasticsearch</h1></section><ul class="note list"><li class="item"><a class="note" href="/posts/elasticsearch/elastic-search-02/">
+            <p class="note title">Elastic Search 02 장</p><p class="note date">Thursday, April 7, 2022</p><p class="note content">2장 ES 기본 동작 문서 색인과 조회 아래 요청은 인덱스를 생성하고, 문서를 색인하고, 스키마를 만드는 등, 많은 작업을 처리한다.
+# request PUT /user/_doc/1 {&#34;username&#34; : &#34;alden.kang&#34;}# response{&#34;_index&#34; : &#34;user&#34;,&#34;_id&#34; : &#34;1&#34;,&#34;_version&#34; : 1,&#34;result&#34; : &#34;created&#34;,&#34;_shards&#34; : {&#34;total&#34; : 2,&#34;successful&#34; : 1,&#34;failed&#34; : 0},&#34;_seq_no&#34; : 0,&#34;_primary_term&#34; : 1} PUT 은 새로운 문서를 입력한다.  POST 는 수정 DELETE 는 삭제 GET은 조회를 의미한다.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/elasticsearch/">elasticsearch</a><a class="tag" href="/tags/book/">book</a></p></li><li class="item"><a class="note" href="/posts/elasticsearch/elastic-search-01/">
+            <p class="note title">Elastic Search 01 장</p><p class="note date">Thursday, April 7, 2022</p><p class="note content">ES 1장 훑어보기 Elasticsearch는 Lucence 기반의 오픈소스 검색엔진으로, Json 기반의 문서를 저장 / 검색 / 데이터 분석 작업을 할 수 있다.
+ES는 아래 4가지 큰 특징을 갖고 있다.
+ 준실시간 검색 엔진 클러스터 구성 스키마리스 Rest API  준실시간 검색 엔진 이란, 실시간에 준하는 검색을 제공한다는 의미이다. ES는 데이터가 입력 될 경우 메모리에 저장 후, Shard (데이터 저장공간)에 데이터를 저장한다.
+ refresh_interval 에 입력된 주기로, 메모리에 저장된 데이터를 Disk에 옮긴다.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/tags/elasticsearch/">elasticsearch</a><a class="tag" href="/tags/book/">book</a></p></li></ul></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section></body>
 
-
-
-
-
-
-
-
-
-
-
-<html lang="ko-KR">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-  
-  <title>elasticsearch - dive-ors</title>
-
-  
-  
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  
-
-  
-  
-  
-  
-  
-  
-  <link rel="preload stylesheet" as="style" href="https://dive-ors.github.io/app.min.css" />
-
-  
-
-  
-  <link rel="preload" as="image" href="https://dive-ors.github.io/theme.png" />
-
-  
-
-  
-  <link rel="icon" href="https://dive-ors.github.io/favicon.ico" />
-  <link rel="apple-touch-icon" href="https://dive-ors.github.io/apple-touch-icon.png" />
-
-  
-  <meta name="generator" content="Hugo 0.68.3" />
-
-  
-  
-  <link
-    rel="alternate"
-    type="application/rss&#43;xml"
-    href="https://dive-ors.github.io/tags/elasticsearch/index.xml"
-    title="dive-ors"
-  />
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <meta property="og:title" content="elasticsearch" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://dive-ors.github.io/tags/elasticsearch/" />
-<meta property="og:updated_time" content="2022-04-07T23:10:26+09:00" />
-
-  
-  <meta itemprop="name" content="elasticsearch">
-<meta itemprop="description" content="">
-  
-  <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="elasticsearch"/>
-<meta name="twitter:description" content=""/>
-
-  
-  
-</head>
-
-
-  <body class="not-ready" data-menu="false">
-    <header class="header">
-  
-  <p class="logo">
-    <a class="site-name" href="https://dive-ors.github.io/">dive-ors</a>
-  </p>
-  
-
-  <script>
-    let bodyClx = document.body.classList;
-    let btnDark = document.querySelector('.btn-dark');
-    let sysDark = window.matchMedia('(prefers-color-scheme: dark)');
-    let darkVal = localStorage.getItem('dark');
-
-    let setDark = (isDark) => {
-      bodyClx['add']('dark');
-      localStorage.setItem('dark', 'yes');
-    };
-
-    setDark(true);
-    requestAnimationFrame(() => bodyClx.remove('not-ready'));
-
-  </script>
-
-  
-  
-
-  
-</header>
-
-
-    <main class="main">
-
-
-
-
-
-
-
- 
-<article class="post-entry">
-  <h2>Elastic Search 02 장</h2>
-  <time>:date_medium</time>
-  <a href="https://dive-ors.github.io/posts/elastic-search-02/"></a>
-</article>
-
-<article class="post-entry">
-  <h2>Elastic Search 01 장</h2>
-  <time>:date_medium</time>
-  <a href="https://dive-ors.github.io/posts/elastic-search-01/"></a>
-</article>
-
-
-
-
-
-</main>
-
-    <footer class="footer">
-  <p>&copy; 2022 <a href="https://dive-ors.github.io/">dive-ors</a></p>
-  <p>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo️️</a>️</p>
-  <p>
-    <a href="https://github.com/nanxiaobei/hugo-paper" rel="noopener" target="_blank">Paper 5.1</a>
-  </p>
-</footer>
-
-  </body>
 </html>

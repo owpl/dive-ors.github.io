@@ -1,14 +1,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>book on notepad</title>
-    <link>https://dive-ors.github.io/tags/book/</link>
-    <description>Recent content in book on notepad</description>
+    <title>docker on notepad</title>
+    <link>https://dive-ors.github.io/tags/docker/</link>
+    <description>Recent content in docker on notepad</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>©2019 Notepadium.</copyright>
     <lastBuildDate>Sat, 16 Apr 2022 16:16:09 +0900</lastBuildDate>
     
-        <atom:link href="https://dive-ors.github.io/tags/book/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://dive-ors.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
